@@ -7,7 +7,8 @@ module.exports = {
       black:'#000205',
       white:'#ffffff',
       transparant:'transparant',
-      radio: '#c2a8e3'
+      radio: '#c2a8e3',
+      green:'#7acc54'
     },
     extend: {},
   },
