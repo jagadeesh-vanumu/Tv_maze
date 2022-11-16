@@ -11,7 +11,7 @@ const ActorItem = ({item}) => {
     
   return (
     <>
-    {image!=='' &&<li className='p-5 bg-green m-3 rounded-md flex flex-col justify-center'>
+    {image!=='' &&<li className='p-5 bg-orange m-3 rounded-md flex flex-col justify-center'>
         <img src= {image} alt = "broken"/>
         <div className='flex flex-row justify-between'>
             <h1 className='text-white font-bold text-lg'>{name}</h1>

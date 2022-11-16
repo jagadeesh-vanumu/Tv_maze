@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import CircularProgress from '@mui/material/CircularProgress';
 import SortIcon from '@mui/icons-material/Sort';
 import axios from "axios";
 import ShowItem from "./ShowItem";
@@ -7,6 +8,8 @@ import ActorItem from "./ActorItem";
 
 const Input = () => {
   const [state, setState] = useState({
+    isLoading: false,
+    isSuccess:false,
     holder: "",
     parameter: "",
     query: "",
@@ -15,15 +18,17 @@ const Input = () => {
 
   const submitForm = async (e) => {
     e.preventDefault();
+    setState({...state, isLoading:true, isSuccess:false})
     const response = await axios.get(
       `https://api.tvmaze.com/search/${state.parameter}?q=${state.query}`
     );
-    setState({ ...state, data: response.data });
+    setState({ ...state, data: response.data, isSuccess:true ,isLoading:false });
   };
 
   const show = state.data && state.data !== "" && state.parameter === "shows" && state.data.length>0
   const actor = state.data && state.data !== "" && state.parameter === "people" && state.data.length>0
   const noResults = state.data.length===0
+  const main = state.isLoading || state.isSuccess
 
   let heading = ""
   if (state.parameter === "shows") {
@@ -42,15 +47,20 @@ const Input = () => {
               type="radio"
               name="search"
               id="show"
+              className="w-5 h-5 cursor-pointer"
               onChange={() =>
                 setState({
                   ...state,
                   holder: "Search By Shows",
                   parameter: "shows",
+                  data:'',
+                  query:'',
+                  isLoading:false,
+                  isSuccess:false,
                 })
               }
             />
-            <label htmlFor="show" name="search" className="ml-3">
+            <label htmlFor="show" name="search" className="ml-3 text-2xl">
               shows
             </label>
           </div>
@@ -59,15 +69,20 @@ const Input = () => {
               type="radio"
               name="search"
               id="actors"
+              className="w-5 h-5 cursor-pointer"
               onChange={() =>
                 setState({
                   ...state,
                   holder: "Search By Actors",
+                  data:'',
                   parameter: "people",
+                  query:'',
+                  isLoading:false,
+                  isSuccess:false,
                 })
               }
             />
-            <label htmlFor="actors" name="search" className="ml-3">
+            <label htmlFor="actors" name="search" className="ml-3 text-2xl">
               actors
             </label>
           </div>
@@ -80,22 +95,24 @@ const Input = () => {
         >
           <input
             type="search"
+            value = {state.query}
             placeholder={state.holder}
             className="outline-none italic"
             onChange={(e) => setState({ ...state, query: e.target.value })}
           />
-          <button type="submit" className="rounded-full bg-radio p-1 hover:">
+          <button type="submit" className="rounded-full bg-radio p-1 hover:w-9">
             <SearchIcon />
           </button>
         </form>
       )}
 
-      {state.parameter!==""&&<><div className="text-white flex flex-row justify-start w-screen mt-10 mb-5 px-10">
+      {state.parameter!==""&& main &&<><div className="text-white flex flex-row justify-start w-screen mt-10 mb-5 px-10">
         <h1 className="mr-3 text-lg font-bold">{heading}</h1>
         <SortIcon />
       </div>
       <hr className="border-1 border-white w-full px-10" />
-      {noResults && <div className="flex flex-col justify-center items-center font-bold text-white text-6xl h-full">No Results Found</div>}</>}
+      {state.isLoading && <div className="flex flex-col justify-center items-center font-bold text-white text-6xl h-full"><CircularProgress/></div>}
+      {noResults && !state.isLoading &&<div className="flex flex-col justify-center items-center font-bold text-white text-6xl h-full">No Results Found</div>}</>}
 
       
       {show && (
