@@ -11,7 +11,6 @@ const Header = () => {
              <li className='mx-3'>Actors</li>
             </ul>
         </nav>
-    
     </header>
   )
 }
