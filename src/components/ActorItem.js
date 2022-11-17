@@ -2,12 +2,11 @@ import React from 'react'
 
 
 const ActorItem = ({item}) => {
-    const imageObject = item["image"] || ''
-    const image = imageObject["medium"] || imageObject["original"] || ''
-    const name = item["name"] || ''
-    const countryObject = item['country'] || ""
-    const country = countryObject['name'] || ""
-    const url =  item['url']
+    
+    const image = item?.image?.medium || item?.image?.original || ''
+    const name = item?.name || ''
+    const country = item?.country?.name || ""
+    const url =  item?.url || ''
 
     
   return (

@@ -2,12 +2,10 @@ import React from 'react'
 import StarIcon from '@mui/icons-material/Star';
 
 const ShowItem = ({item}) => {
-    const imageObject = item["image"] || ''
-    const image = imageObject["medium"] || imageObject["original"] || ''
-    const name = item["name"] || ''
-    const ratingObject = item['rating'] || ""
-    const rating = ratingObject['average'] || ""
-    const url = item['url']
+    const image = item?.image?.medium || item?.image?.original || ''
+    const name = item?.name || ''
+    const rating = item?.rating?.average || ""
+    const url = item?.url || ''
 
     
   return (
