@@ -116,14 +116,14 @@ const Input = () => {
 
       
       {show && (
-        <ul className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 w-full p-10">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full p-10">
           {state.data.map((each) => (
             <ShowItem key={each.show.id} item={each.show} />
           ))}
         </ul>
       )}
       {actor && (
-        <ul className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 w-full p-10">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full gap-4 p-10">
           {state.data.map((each) => (
             <ActorItem key={each.person.id} item={each.person} />
           ))}
