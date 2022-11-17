@@ -14,10 +14,9 @@ const ActorItem = ({item}) => {
     {image!=='' &&<li className='p-5 bg-orange m-3 rounded-md flex flex-col justify-center'>
         <a href={url} target="_blank" rel="noreferrer"><img src= {image} alt = "broken" className='w-full'/></a>
         <div className='flex flex-row justify-between items-center'>
-            <h1 className='text-white font-bold text-lg'>{name}</h1>
+            <h1 className='text-white font-bold text-md'>{name}</h1>
             {country!==''&&<div >
             {country} 
-            
             </div>}
         </div>
     </li>}

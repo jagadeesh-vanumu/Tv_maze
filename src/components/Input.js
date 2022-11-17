@@ -7,6 +7,7 @@ import ShowItem from "./ShowItem";
 import ActorItem from "./ActorItem";
 
 const Input = () => {
+  console.log("rendered")
   const [state, setState] = useState({
     isLoading: false,
     isSuccess:false,
@@ -40,7 +41,7 @@ const Input = () => {
 
   return (
     <div className="flex flex-col items-center my-5">
-      <article className="p-20 py-5">
+      <article className="p-20 py-5 max-w-screen">
         <section className="flex flex-row justify-between bg-radio rounded-md py-5 italic font-semibold text-lg">
           <div className="mx-20">
             <input
